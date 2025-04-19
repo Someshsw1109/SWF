@@ -43,14 +43,14 @@ const data = {
         },
         {
             title: 'Best Sellers in T-Shirts',
-            buttonCaptions: 'Shop Now',
+            buttonCaption: 'Shop Now',
             image: '/images/banner1.jpg',
             url: '/search?category=T-Shirts',
             isPublished: true,
         },
         {
             title: 'Best Deals on Wrist Watches',
-            buttonCaptions: 'See More',
+            buttonCaption: 'See More',
             image: '/images/banner2.jpg',
             url: '/search?category=Watches',
             isPublished: true,
