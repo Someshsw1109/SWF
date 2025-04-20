@@ -41,9 +41,8 @@ const ProductPrice = ({
         </span>
       </div>
       <div
-        className={`flex ${
-          forListing && 'justify-center'
-        } items-center gap-2`}
+        className={`flex ${forListing && 'justify-center'
+          } items-center gap-2`}
       >
         <div className={cn('text-3xl', className)}>
           <span className='text-xs align-super'>$</span>

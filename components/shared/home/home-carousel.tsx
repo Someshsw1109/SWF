@@ -22,7 +22,7 @@ export function HomeCarousel({
     }[]
 }) {
     const plugin = React.useRef(
-        Autoplay({delay: 3000, stopOnInteraction: true})
+        Autoplay({ delay: 3000, stopOnInteraction: true })
     )
 
     return (
@@ -47,9 +47,9 @@ export function HomeCarousel({
                                 />
                                 <div className='absolute w-1/3 left-16 md:left-32 top-1/2 transform -translate-y-1/2'>
                                     <h2
-                                       className={cn(
-                                           'text-xl md:text-6xl font-bold mb-4 text-primary '
-                                       )}
+                                        className={cn(
+                                            'text-xl md:text-6xl font-bold mb-4 text-primary '
+                                        )}
                                     >
                                         {item.title}
                                     </h2>
