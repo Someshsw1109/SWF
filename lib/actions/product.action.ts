@@ -2,12 +2,14 @@
 
 import { connectToDatabase } from '@/lib/db'
 import Product, { IProduct } from '@/lib/db/models/product.model'
-import { PAGE_SIZE } from '../constants'
+import { FREE_SHIPPING_MIN_PRICE, PAGE_SIZE } from '../constants'
+import { OrderItem } from '@/types'
+import { round2 } from '../utils'
 
 export async function getAllCategories() {
     await connectToDatabase()
     const categories = await Product.find({ isPublished: true }).distinct(
-    'category'
+        'category'
     )
     return categories
 }
@@ -20,36 +22,36 @@ export async function getProductsForCard({
 }) {
     await connectToDatabase()
     const products = await Product.find(
-    { tags: { $in: [tag] }, isPublished: true },
-    {
-        name: 1,
-        href: { $concat: ['/product/', '$slug'] },
-        image: { $arrayElemAt: ['$images', 0] },
-    }
+        { tags: { $in: [tag] }, isPublished: true },
+        {
+            name: 1,
+            href: { $concat: ['/product/', '$slug'] },
+            image: { $arrayElemAt: ['$images', 0] },
+        }
     )
-    .sort({ createdAt: 'desc' })
-    .limit(limit)
+        .sort({ createdAt: 'desc' })
+        .limit(limit)
     return JSON.parse(JSON.stringify(products)) as {
-    name: string
-    href: string
-    image: string
+        name: string
+        href: string
+        image: string
     }[]
 }
 
 export async function getProductsByTag({
     tag,
-    limit=10,
+    limit = 10,
 }: {
     tag: string
     limit?: number
 }) {
     await connectToDatabase()
-    const products = await Product.find({ 
-        tags: { $in: [tag] }, 
-        isPublished: true 
+    const products = await Product.find({
+        tags: { $in: [tag] },
+        isPublished: true
     })
-    .sort({ createdAt: 'desc' })
-    .limit(limit)
+        .sort({ createdAt: 'desc' })
+        .limit(limit)
     return JSON.parse(JSON.stringify(products)) as IProduct[]
 }
 
@@ -58,7 +60,8 @@ export async function getProductsByTag({
 export async function getProductBySlug(slug: string) {
     await connectToDatabase()
     const product = await Product.findOne({
-    slug, isPublished: true})
+        slug, isPublished: true
+    })
     if (!product) throw new Error('Product not found')
     return JSON.parse(JSON.stringify(product)) as IProduct
 }
@@ -91,5 +94,30 @@ export async function getRelatedProductsByCategory({
     return {
         data: JSON.parse(JSON.stringify(products)) as IProduct[],
         totalPages: Math.ceil(productsCount / limit),
+    }
+}
+
+export const calcDeliveryDateAndPrice = async ({
+    items,
+}: {
+    deliveryDateIndex?: number
+    items: OrderItem[]
+}) => {
+    const itemsPrice = round2(
+        items.reduce((acc, item) => acc + item.price * item.quantity, 0)
+    )
+
+    const shippingPrice = itemsPrice > FREE_SHIPPING_MIN_PRICE ? 0 : 5
+    const taxPrice = round2(itemsPrice * 0.15)
+    const totalPrice = round2(
+        itemsPrice +
+        (shippingPrice ? round2(shippingPrice) : 0) +
+        (taxPrice ? round2(taxPrice) : 0)
+    )
+    return {
+        itemsPrice,
+        shippingPrice,
+        taxPrice,
+        totalPrice,
     }
 }

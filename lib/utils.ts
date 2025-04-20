@@ -11,7 +11,7 @@ export const formatNumberWithDecimal = (num: number): string => {
   return decimal ? `${int}.${decimal.padEnd(2, '0')}` : int
 }
 
-export const toSlug = (text: string): string => 
+export const toSlug = (text: string): string =>
   text
     .toLowerCase()
     .replace(/[^\w\s-]+/g, '')
@@ -31,3 +31,9 @@ const NUMBER_FORMATTER = new Intl.NumberFormat('en-US')
 export function formatNumber(number: number) {
   return NUMBER_FORMATTER.format(number)
 }
+
+export const round2 = (num: number) =>
+  Math.round((num + Number.EPSILON) * 100) / 100
+
+export const generateId = () =>
+  Array.from({ length: 24 }, () => Math.floor(Math.random() * 10)).join('')

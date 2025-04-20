@@ -1,5 +1,5 @@
-import { ShoppingCartIcon } from "lucide-react"
 import Link from "next/link"
+import CartButton from "./cart-button"
 
 export default function Menu() {
     return (
@@ -8,10 +8,7 @@ export default function Menu() {
                 <Link href='/signin' className='flex items-center header-button'>
                     Hello, Sign in
                 </Link>
-                <Link href='/cart' className="header-button">
-                    <ShoppingCartIcon className="h-8 w-8" />
-                    <span className="font-bold">Cart</span>
-                </Link>
+                <CartButton />
             </nav>
         </div>
     )
