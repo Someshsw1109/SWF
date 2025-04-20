@@ -46,7 +46,7 @@ export default async function ProductDetails(props: {
 
   return (
     <div>
-      <AddToBrowsingHistory id={product.id} category={product.category} />
+      <AddToBrowsingHistory id={product._id} category={product.category} />
       <section>
         <div className='grid grid-cols-1 md:grid-cols-5  '>
           <div className='col-span-2'>
