@@ -49,7 +49,7 @@ export default function OverviewReport() {
         }
     }, [date])
 
-    if (!data)
+    if (!data || isPending)
         return (
             <div className='space-y-4'>
                 <div>
