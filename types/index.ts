@@ -11,6 +11,7 @@ export type IReviewDetails = IReviewInput & {
 }
 export type IProductInput = z.infer<typeof ProductInputSchema>
 
+
 export type Data = {
     users: IUserInput[]
     products: IProductInput[]
@@ -32,7 +33,17 @@ export type Data = {
     }[]
 }
 
-// Cart
+
+// Order
+export type IOrderInput = z.infer<typeof OrderInputSchema>
+export type IOrderList = IOrderInput & {
+  _id: string
+  user: {
+    name: string
+    email: string
+  }
+  createdAt: Date
+}
 export type OrderItem = z.infer<typeof OrderItemSchema>
 export type Cart = z.infer<typeof CartSchema>
 export type ShippingAddress = z.infer<typeof ShippingAddressSchema>
@@ -43,6 +54,3 @@ export type IUserSignIn = z.infer<typeof UserSignInSchema>
 export type IUserSignUp = z.infer<typeof UserSignUpSchema>
 export type IUserName = z.infer<typeof UserNameSchema>
 
-// Order
-
-export type IOrderInput = z.infer<typeof OrderInputSchema>
