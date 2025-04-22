@@ -4,6 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* -- Other theme variables remain the same -- */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -44,6 +45,7 @@
 }
 
 :root {
+  /* -- :root variables remain the same -- */
   --radius: 0.5rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
@@ -79,6 +81,7 @@
 }
 
 .dark {
+  /* -- .dark variables remain the same -- */
   --background: oklch(0.141 0.005 285.823);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.21 0.006 285.885);
@@ -129,13 +132,19 @@
     @apply text-sky-700 hover:text-orange-700 hover:underline;
   }
 
+  /* >>> Updated .header-button <<< */
   .header-button {
-    @apply cursor-pointer p-1 border-transparent hover:border-white rounded-[2px];
+    @apply cursor-pointer p-1 border-transparent rounded-[2px]
+           text-violet-600 /* Base violet color */
+           hover:border-white hover:text-violet-700; /* Keep border hover, change text color on hover */
+           /* Adjust shades (e.g., text-violet-500, hover:text-violet-600) as needed */
   }
+  /* >>> End of update <<< */
 
   .item-button {
-    @apply p-3 hover:bg-muted hover:no-underline;
-  }  
+    @apply flex items-center justify-between p-4 hover:bg-accent focus:outline-none focus:bg-accent;
+    /* Or adjust as needed */
+  }
 
   .h1-bold {
     @apply font-bold text-2xl lg:text-3xl;
@@ -147,5 +156,5 @@
 
   .flex-between {
     @apply flex justify-between items-center;
-  }  
+  }
 }
