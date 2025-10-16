@@ -135,8 +135,8 @@
   /* >>> Updated .header-button <<< */
   .header-button {
     @apply cursor-pointer p-2 border-transparent rounded-md
-           text-violet-600 transition-colors duration-300
-           hover:border-white hover:text-violet-700 hover:bg-gray-700;
+           text-foreground transition-colors duration-300
+           hover:border-white hover:bg-gray-700;
   }
   /* >>> End of update <<< */
 
