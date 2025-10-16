@@ -13,7 +13,7 @@ import { getAllCategories } from "@/lib/actions/product.action";
 export default async function Header() {
     const categories = await getAllCategories()
     return (
-        <header className='bg-black text-white'>
+<header className='bg-black text-white relative z-50'>
             <div className='px-2'>
                 <div className='flex items-center justify-between'>
                     <div className='flex items-center'>
@@ -30,10 +30,12 @@ export default async function Header() {
                             {APP_NAME}
                         </Link>
                     </div>
-                    <div className='hidden md:block flex-1 max-w-xl'>
-                        <Search />
+                    <div className="flex-1 hidden md:flex items-center justify-end gap-2">
+                        <div className='flex-1 max-w-xl'>
+                            <Search />
+                        </div>
+                        <Menu />
                     </div>
-                    <Menu />
                 </div>
                 <div className='md:hidden block py-2'>
                     <Search />
