@@ -19,11 +19,11 @@ export default function CartButton() {
             <div className='flex items-end text-xs relative'>
                 <ShoppingCartIcon className='h-8 w-8' />
 
-                {isMounted && (
+                {isMounted && cartItemsCount > 0 && (
                     <span
                         className={cn(
-                            `bg-black  px-1 rounded-full text-primary text-base font-bold absolute right-[30px] top-[-4px] z-10`,
-                            cartItemsCount >= 10 && 'text-sm px-0 p-[1px]'
+                            `bg-primary text-primary-foreground rounded-full text-xs font-bold absolute -right-1 -top-1 px-2 py-1`,
+                            cartItemsCount >= 10 && 'px-1'
                         )}
                     >
                         {cartItemsCount}
