@@ -2,11 +2,6 @@ import Link from 'next/link'
 import Pagination from '@/components/shared/pagination'
 import ProductCard from '@/components/shared/product/product-card'
 import { Button } from '@/components/ui/button'
-import { 
-    getAllCategories,
-    getAllProducts,
-    getAllTags 
-} from '@/lib/actions/product.action'
 import { IProduct } from '@/lib/db/models/product.model'
 import ProductSortSelector from '@/components/shared/product/product-sort-selector'
 import { getFilterUrl, toSlug } from '@/lib/utils'
@@ -103,17 +98,15 @@ export default async function SearchPage(props: {
 
     const params = { q, category, tag, price, rating, sort, page }
 
-    const categories = await getAllCategories()
-    const tags = await getAllTags()
-    const data = await getAllProducts({
-        category,
-        tag,
-        query: q,
-        price,
-        rating,
-        page: Number(page),
-        sort,
-    })
+    const categories: string[] = []
+    const tags: string[] = []
+    const data = {
+      products: [],
+      totalPages: 0,
+      totalProducts: 0,
+      from: 0,
+      to: 0,
+    }
     return (
         <div>
             <div className='mb-2 py-2 md:border-b flex-between flex-col md:flex-row '>
